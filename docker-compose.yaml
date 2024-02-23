@@ -1,0 +1,189 @@
+version: '3.8'
+services:
+  postgres_db:
+    container_name: postgres_db_stock_management
+    image: postgres:14-alpine3.18
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: stock_management
+    ports:
+      - "5432:5432"
+    networks:
+      - stock-management-network
+    volumes:
+      - volume_postgres_db_stock_management:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -U postgres | grep 'accepting connections' || exit 1"
+      interval: 2s
+      timeout: 20s
+      retries: 10
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+    networks:
+      - stock-management-network
+    volumes:
+      - "../data/redis:/var/lib/redis/data"
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+        window: 120s
+      resources:
+        reservations:
+          cpus: "0.50"
+          memory: 512M
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+  zuul-edge-sever:
+    container_name: zuul-edge-server
+    image: pblgllgs/zuul-edge-server:1.0-j11
+    ports:
+      - "8762:8762"
+    expose:
+      - "8762"
+    networks:
+      - stock-management-network
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8765/eureka
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        reservations:
+          cpus: "0.50"
+          memory: 512M
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+  eureka-sever:
+    container_name: eureka-server
+    image: pblgllgs/eureka-server:1.0-j11
+    ports:
+      - "8765:8765"
+    expose:
+      - "8765"
+    networks:
+      - stock-management-network
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        reservations:
+          cpus: "0.50"
+          memory: 512M
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+  product-service:
+    container_name: product-service
+    image: pblgllgs/product-service:1.0-j11
+    ports:
+      - "9788:9788"
+    expose:
+      - "9788"
+    networks:
+      - stock-management-network
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8765/eureka
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        reservations:
+          cpus: "0.50"
+          memory: 512M
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+  product-cache-service:
+    container_name: product-cache-service
+    image: pblgllgs/product-cache-service:1.0-j11
+    ports:
+      - "9791:9791"
+    expose:
+      - "9791"
+    networks:
+      - stock-management-network
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8765/eureka
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        reservations:
+          cpus: "0.50"
+          memory: 512M
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+  config-server:
+    container_name: config-server
+    image: pblgllgs/config-server:1.0-j11
+    ports:
+      - "8888:8888"
+    expose:
+      - "8888"
+    networks:
+      - stock-management-network
+    environment:
+      SPRING_PROFILES_ACTIVE: stage
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        reservations:
+          cpus: "0.50"
+          memory: 512M
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+networks:
+  stock-management-network:
+
+volumes:
+  volume_postgres_db_stock_management:
+    external: false
