@@ -16,7 +16,7 @@ import com.pblgllgs.productservice.response.FriendlyMessage;
 import com.pblgllgs.productservice.response.InternalApiResponse;
 import com.pblgllgs.productservice.response.ProductResponse;
 import com.pblgllgs.productservice.service.IProductRepositoryService;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -61,7 +61,7 @@ public class ProductController {
             @PathVariable("productId") Long productId
     ) {
         log.debug("[{}][getProduct] -> request: {}", this.getClass().getSimpleName(), productId);
-        Product product = iProductRepositoryService.getProduct(language,productId);
+        Product product = iProductRepositoryService.getProduct(language, productId);
         ProductResponse productResponse = convertProductResponse(product);
         log.debug("[{}][getProduct] -> response: {}", this.getClass().getSimpleName(), productResponse);
         return InternalApiResponse.<ProductResponse>builder()
@@ -83,7 +83,7 @@ public class ProductController {
             @RequestBody ProductUpdateRequest productUpdateRequest
     ) {
         log.debug("[{}][updateProduct] -> request: {}", this.getClass().getSimpleName(), productId);
-        Product product = iProductRepositoryService.updatedProduct(language,productId, productUpdateRequest);
+        Product product = iProductRepositoryService.updatedProduct(language, productId, productUpdateRequest);
         ProductResponse productResponse = convertProductResponse(product);
         log.debug("[{}][updateProduct] -> response: {}", this.getClass().getSimpleName(), productResponse);
         return InternalApiResponse.<ProductResponse>builder()
@@ -97,7 +97,7 @@ public class ProductController {
                 .build();
     }
 
-    @ApiOperation(value = "This endpoint get all products")
+    @Operation(description = "This endpoint get all products")
     @GetMapping("/{language}/products")
     @ResponseStatus(HttpStatus.OK)
     public InternalApiResponse<List<ProductResponse>> getProductById(
@@ -106,7 +106,7 @@ public class ProductController {
         log.debug("[{}][getProducts] -> request: {}", this.getClass().getSimpleName());
         List<Product> products = iProductRepositoryService.getProducts(language);
         List<ProductResponse> productsResponse = products.stream().map(this::convertProductResponse).collect(Collectors.toList());
-        log.debug("[{}][getProducts] -> response: {}", this.getClass().getSimpleName(),productsResponse );
+        log.debug("[{}][getProducts] -> response: {}", this.getClass().getSimpleName(), productsResponse);
         return InternalApiResponse.<List<ProductResponse>>builder()
                 .friendlyMessage(FriendlyMessage.builder()
                         .title(FriendlyMessageUtils.getFriendlyMessage(language, FriendlyMessageCodes.SUCCESS))
@@ -118,17 +118,17 @@ public class ProductController {
                 .build();
     }
 
-    @ApiOperation(value = "This endpoint delete product by id")
+    @Operation(description = "This endpoint delete product by id")
     @DeleteMapping("/{language}/delete/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public InternalApiResponse<ProductResponse> deleteProductById(
             @PathVariable("language") Language language,
             @PathVariable("productId") Long productId
     ) {
-        log.debug("[{}][deleteProduct] -> request: {}", this.getClass().getSimpleName(),productId);
-        Product product = iProductRepositoryService.deleteProduct(language,productId);
+        log.debug("[{}][deleteProduct] -> request: {}", this.getClass().getSimpleName(), productId);
+        Product product = iProductRepositoryService.deleteProduct(language, productId);
         ProductResponse productResponse = convertProductResponse(product);
-        log.debug("[{}][deleteProduct] -> response: {}", this.getClass().getSimpleName(),productResponse );
+        log.debug("[{}][deleteProduct] -> response: {}", this.getClass().getSimpleName(), productResponse);
         return InternalApiResponse.<ProductResponse>builder()
                 .friendlyMessage(FriendlyMessage.builder()
                         .title(FriendlyMessageUtils.getFriendlyMessage(language, FriendlyMessageCodes.SUCCESS))

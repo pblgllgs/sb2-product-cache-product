@@ -3,8 +3,6 @@ G
 product-service/HELP.md,7\1\71526f1daa530271419d8f17888ddd5523efe263
 G
 product-service/pom.xml,f\c\fcf146007330bb14605a232d25428bbf6aa50b7b
-Š
-Zproduct-service/src/main/java/com/pblgllgs/productservice/config/SwaggerConfiguration.java,7\8\78e58831b28a4a9b6e109cffe576703e8eeb5182
 “
 cproduct-service/src/main/java/com/pblgllgs/productservice/exception/enums/IFriendlyMessageCode.java,c\a\cad3db29abf7b7b75720f762e1e7bd67980cb838
 “
@@ -57,20 +55,10 @@ H
 Yzuul-edge-server/src/main/java/com/pblgllgs/zuuledgeserver/ZuulEdgeServerApplication.java,0\5\059db8b31474ced8f263cb1a891fb5d46b7a145e
 K
 zuul-edge-server/Dockerfile,f\1\f1b8aa79e52ebf585c00ea6165bea375f30fc7db
-\
-,stock-management-config/product-service.yaml,d\8\d8001039018d0e2831c3ab63f943b07128ae0e19
-Z
-*stock-management-config/eureka-server.yaml,0\4\04ac3a2b49a678e4b58c19211ceb0b77d3280fcc
-]
--stock-management-config/zuul-edge-server.yaml,0\b\0b340bc93020c4bd5851819909bd69a47ba7936f
-X
-(stock-management-config/application.yaml,b\5\b5312a585508c8621d2a0313491e5bc7aa527132
 M
 product-cache-service/pom.xml,3\3\33edfddc48fdb167e5f9335a861aa691b05dd2a3
 ˜
 hproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/ProductCacheServiceApplication.java,f\f\ff043ab36a10e5502af3eb6d89ceaaafd48fc36b
-‚
-Rproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/Language.java,f\0\f0bcf24f5971e351df8aff901ac07027f7ee4b49
 ’
 bproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/response/FriendlyMessage.java,3\2\320a45a7d07bf440f083eb38b7ace745b42fc4a8
 –
@@ -81,12 +69,8 @@ bproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/response/P
 qproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/feign/product/ProductServiceFeignClient.java,e\0\e06355c7b5f944bffd1641b609d4fbc17ab4b760
 ”
 dproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/respository/entity/Product.java,5\c\5c203e35e2dd2c45fefaf788a31cd06e87408e88
-ž
-nproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/respository/entity/ProductRepository.java,c\4\c4a5457cb3f8170acd1f002601aa34c17b2ce347
 —
 gproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/respository/ProductRepository.java,c\a\ca4d48a2694a7bd6c114da04b332fa778d12a473
-ž
-nproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/respository/ProductRepositoryService.java,4\9\49e5aaaff035eea821f21243ef046c934bbdd27e
 š
 jproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/service/ProductRepositoryService.java,6\4\64c30ce6c7464a6ba799502c6afdf80094f10765
 ž
@@ -95,5 +79,7 @@ nproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/service/Pr
 kproduct-cache-service/src/main/java/com/pblgllgs/productcacheservice/controller/ProductCacheController.java,9\c\9cc1a411ad494880ce33772ad29c7fb8b9ed1249
 P
  product-cache-service/Dockerfile,b\c\bca177faceac82fe5d4d7cee13487a0b928b3987
-b
-2stock-management-config/product-cache-service.yaml,e\8\e84601d4ae8c3e0844d993d67f0e819319aae39c
+ˆ
+Xproduct-service/src/main/java/com/pblgllgs/productservice/ProductServiceApplication.java,f\d\fd9b7ea764edfcb2b14fa8f0a6a44afb02dcd601
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a

@@ -1,6 +1,8 @@
 spring:
   application:
     name: eureka-server
+  profiles:
+    active: localhost
 ---
 spring:
   cloud:
@@ -9,10 +11,6 @@ spring:
   config:
     activate:
       on-profile: localhost
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
 ---
 spring:
   cloud:
@@ -21,8 +19,3 @@ spring:
   config:
     activate:
       on-profile: stage
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-server:8761/eureka

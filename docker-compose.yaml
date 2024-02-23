@@ -50,7 +50,7 @@ services:
 
   zuul-edge-sever:
     container_name: zuul-edge-server
-    image: pblgllgs/zuul-edge-server:1.0-j11
+    image: pblgllgs/zuul-edge-server:${VERSION}
     ports:
       - "8762:8762"
     expose:
@@ -59,7 +59,6 @@ services:
       - stock-management-network
     environment:
       SPRING_PROFILES_ACTIVE: stage
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8765/eureka
     deploy:
       replicas: 1
       restart_policy:
@@ -77,11 +76,11 @@ services:
 
   eureka-sever:
     container_name: eureka-server
-    image: pblgllgs/eureka-server:1.0-j11
+    image: pblgllgs/eureka-server:${VERSION}
     ports:
-      - "8765:8765"
+      - "8761:8761"
     expose:
-      - "8765"
+      - "8761"
     networks:
       - stock-management-network
     environment:
@@ -103,7 +102,7 @@ services:
 
   product-service:
     container_name: product-service
-    image: pblgllgs/product-service:1.0-j11
+    image: pblgllgs/product-service:${VERSION}
     ports:
       - "9788:9788"
     expose:
@@ -112,7 +111,6 @@ services:
       - stock-management-network
     environment:
       SPRING_PROFILES_ACTIVE: stage
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8765/eureka
     deploy:
       replicas: 1
       restart_policy:
@@ -130,7 +128,7 @@ services:
 
   product-cache-service:
     container_name: product-cache-service
-    image: pblgllgs/product-cache-service:1.0-j11
+    image: pblgllgs/product-cache-service:${VERSION}
     ports:
       - "9791:9791"
     expose:
@@ -139,7 +137,6 @@ services:
       - stock-management-network
     environment:
       SPRING_PROFILES_ACTIVE: stage
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8765/eureka
     deploy:
       replicas: 1
       restart_policy:
@@ -157,7 +154,7 @@ services:
 
   config-server:
     container_name: config-server
-    image: pblgllgs/config-server:1.0-j11
+    image: pblgllgs/config-server:${VERSION}
     ports:
       - "8888:8888"
     expose:

@@ -10,12 +10,14 @@ info:
 ---
 
 spring:
-  profiles: localhost
   cloud:
     config:
       server:
         git:
           uri: https://github.com/pblgllgs/sb2-config-files-product-cache-product.git
+  config:
+    activate:
+      on-profile: localhost
 logging:
   level:
     root: debug
@@ -25,7 +27,9 @@ server:
 ---
 
 spring:
-  profiles: stage
+  config:
+    activate:
+      on-profile: stage
   cloud:
     config:
       server:

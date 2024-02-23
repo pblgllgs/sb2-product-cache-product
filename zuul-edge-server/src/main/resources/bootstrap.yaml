@@ -1,29 +1,30 @@
 spring:
   application:
-    name: eureka-server
+    name: zuul-edge-server
   profiles:
     active: localhost
+  main:
+    web-application-type: reactive
+info:
+  component: Zuul Edge Server
+
+server:
+  port: 8762
 
 ---
-
 spring:
-  profiles: localhost
   cloud:
     config:
       uri: http://localhost:8888
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  config:
+    activate:
+      on-profile: localhost
 
 ---
-
 spring:
-  profiles: stage
   cloud:
     config:
       uri: http://config-server:8888
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-server:8761/eureka
+  config:
+    activate:
+      on-profile: stage
