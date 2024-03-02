@@ -22,11 +22,11 @@ public class FriendlyMessageUtils {
 
     public static final String SPECIAL_CHARACTER = "__";
 
-    public static String getFriendlyMessage(Language languaje, IFriendlyMessageCode messageCode) {
+    public static String getFriendlyMessage(Language language, IFriendlyMessageCode messageCode) {
         String messageKey = null;
 
         try {
-            Locale locale = new Locale(languaje.name());
+            Locale locale = new Locale(language.name());
             ResourceBundle resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, locale);
             messageKey = messageCode.getClass().getSimpleName() + SPECIAL_CHARACTER + messageCode;
             return resourceBundle.getString(messageKey);

@@ -49,7 +49,6 @@ public class ProductController {
                         .build())
                 .httpStatus(HttpStatus.CREATED)
                 .hasError(false)
-
                 .payload(productResponse)
                 .build();
     }
